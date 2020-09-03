@@ -1,4 +1,4 @@
-package com.cdm.sig.utils;
+package com.cdm.sig.core.archive;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

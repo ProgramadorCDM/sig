@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class FotoServiceImpl extends GenericServiceImpl<Foto, String> implements FotoServiceAPI {
 
+    private final FotoRepository repository;
+
     @Autowired
-    private FotoRepository repository;
+    public FotoServiceImpl(FotoRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Foto, String> getRepository() {

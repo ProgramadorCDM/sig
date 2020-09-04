@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContratoServiceImpl extends GenericServiceImpl<Contrato, Long> implements ContratoServiceAPI {
 
+    private final ContratoRepository repository;
+
     @Autowired
-    private ContratoRepository repository;
+    public ContratoServiceImpl(ContratoRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Contrato, Long> getRepository() {

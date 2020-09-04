@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmpleadoGenericServiceImpl extends GenericServiceImpl<Empleado, String> implements EmpleadoServiceAPI {
 
+    private final EmpleadoRepository repository;
+
     @Autowired
-    private EmpleadoRepository repository;
+    public EmpleadoGenericServiceImpl(EmpleadoRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Empleado, String> getRepository() {

@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class VacacionesServiceImpl extends GenericServiceImpl<Vacaciones, Long> implements VacacionesServiceAPI {
 
+    private final VacacionesRepository repository;
+
     @Autowired
-    private VacacionesRepository repository;
+    public VacacionesServiceImpl(VacacionesRepository repository) {
+        this.repository = repository;
+    }
 
 
     @Override

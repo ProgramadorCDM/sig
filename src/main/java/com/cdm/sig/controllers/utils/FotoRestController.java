@@ -1,7 +1,7 @@
 package com.cdm.sig.controllers.utils;
 
-import com.cdm.sig.models.integrations.Afp;
-import com.cdm.sig.services.apis.utils.AfpServiceAPI;
+import com.cdm.sig.models.Foto;
+import com.cdm.sig.services.apis.FotoServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,31 +16,31 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"*"}, maxAge = 3600)
-@RequestMapping("/api/afp")
-public class AfpRestController {
+@RequestMapping("/api/foto")
+public class FotoRestController {
 
-    private final AfpServiceAPI serviceAPI;
+    private final FotoServiceAPI serviceAPI;
 
     @Autowired
-    public AfpRestController(AfpServiceAPI serviceAPI) {
+    public FotoRestController(FotoServiceAPI serviceAPI) {
         this.serviceAPI = serviceAPI;
     }
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public List<Afp> getAll() {
+    public List<Foto> getAll() {
         return serviceAPI.getAll();
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public Afp find(@PathVariable String id) {
+    public Foto find(@PathVariable String id) {
         return serviceAPI.get(id);
     }
 
     @PostMapping("/save")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> save(@Valid @RequestBody Afp entity, BindingResult result) {
+    public ResponseEntity<?> save(@Valid @RequestBody Foto entity, BindingResult result) {
         if (result.hasErrors()) {
             return this.validar(result);
         }
@@ -50,7 +50,7 @@ public class AfpRestController {
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        Afp entity = serviceAPI.get(id);
+        Foto entity = serviceAPI.get(id);
         if (entity != null) {
             serviceAPI.delete(id);
         } else {

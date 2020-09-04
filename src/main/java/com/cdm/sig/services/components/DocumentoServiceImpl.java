@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class DocumentoServiceImpl extends GenericServiceImpl<Documento, Long> implements DocumentoServiceAPI {
 
+    private final DocumentoRepository repository;
+
     @Autowired
-    private DocumentoRepository repository;
+    public DocumentoServiceImpl(DocumentoRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Documento, Long> getRepository() {

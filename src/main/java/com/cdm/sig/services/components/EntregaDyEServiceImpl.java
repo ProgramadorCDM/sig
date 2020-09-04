@@ -13,8 +13,12 @@ import java.util.List;
 @Service
 public class EntregaDyEServiceImpl extends GenericServiceImpl<EntregaDyE, Long> implements EntregaDyEServiceAPI {
 
+    private final EntregaDyERepository repository;
+
     @Autowired
-    private EntregaDyERepository repository;
+    public EntregaDyEServiceImpl(EntregaDyERepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<EntregaDyE, Long> getRepository() {

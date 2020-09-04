@@ -1,7 +1,7 @@
 package com.cdm.sig.controllers.utils;
 
-import com.cdm.sig.models.integrations.Afp;
-import com.cdm.sig.services.apis.utils.AfpServiceAPI;
+import com.cdm.sig.models.integrations.Arl;
+import com.cdm.sig.services.apis.utils.ArlServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,31 +16,31 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"*"}, maxAge = 3600)
-@RequestMapping("/api/afp")
-public class AfpRestController {
+@RequestMapping("/api/arl")
+public class ArlRestController {
 
-    private final AfpServiceAPI serviceAPI;
+    private final ArlServiceAPI serviceAPI;
 
     @Autowired
-    public AfpRestController(AfpServiceAPI serviceAPI) {
+    public ArlRestController(ArlServiceAPI serviceAPI) {
         this.serviceAPI = serviceAPI;
     }
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public List<Afp> getAll() {
+    public List<Arl> getAll() {
         return serviceAPI.getAll();
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public Afp find(@PathVariable String id) {
+    public Arl find(@PathVariable String id) {
         return serviceAPI.get(id);
     }
 
     @PostMapping("/save")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> save(@Valid @RequestBody Afp entity, BindingResult result) {
+    public ResponseEntity<?> save(@Valid @RequestBody Arl entity, BindingResult result) {
         if (result.hasErrors()) {
             return this.validar(result);
         }
@@ -50,7 +50,7 @@ public class AfpRestController {
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        Afp entity = serviceAPI.get(id);
+        Arl entity = serviceAPI.get(id);
         if (entity != null) {
             serviceAPI.delete(id);
         } else {

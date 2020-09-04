@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecommendationServiceImpl extends GenericServiceImpl<Recommendation, Long> implements RecommendationServiceAPI {
 
+    private final RecommendationRepository repository;
+
     @Autowired
-    private RecommendationRepository repository;
+    public RecommendationServiceImpl(RecommendationRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Recommendation, Long> getRepository() {

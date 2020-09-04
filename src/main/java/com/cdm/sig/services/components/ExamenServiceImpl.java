@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class ExamenServiceImpl extends GenericServiceImpl<Examen, Long> implements ExamenServiceAPI {
 
+    private final ExamenRepository repository;
+
     @Autowired
-    private ExamenRepository repository;
+    public ExamenServiceImpl(ExamenRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Examen, Long> getRepository() {

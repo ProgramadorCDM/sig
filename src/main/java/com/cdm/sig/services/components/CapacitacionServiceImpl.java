@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion, Long> implements CapacitacionServiceAPI {
 
+    private final CapacitacionRepository repository;
+
     @Autowired
-    private CapacitacionRepository repository;
+    public CapacitacionServiceImpl(CapacitacionRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Capacitacion, Long> getRepository() {

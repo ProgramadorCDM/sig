@@ -13,8 +13,12 @@ import java.util.List;
 @Service
 public class IncapacidadServiceImpl extends GenericServiceImpl<Incapacidad, Long> implements IncapacidadServiceAPI {
 
+    private final IncapacidadRepository repository;
+
     @Autowired
-    private IncapacidadRepository repository;
+    public IncapacidadServiceImpl(IncapacidadRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public JpaRepository<Incapacidad, Long> getRepository() {

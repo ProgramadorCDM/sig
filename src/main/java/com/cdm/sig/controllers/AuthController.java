@@ -19,12 +19,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -47,7 +46,8 @@ public class AuthController {
     JwtUtils jwtUtils;
 
     @PostMapping("signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result) {
+        if (result.hasErrors()) return this.validar(result);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
@@ -67,14 +67,15 @@ public class AuthController {
     }
 
     @PostMapping("signup")
-    public ResponseEntity<?> responseEntity(@Valid @RequestBody SignupRequest signupRequest) {
+    public ResponseEntity<?> responseEntity(@Valid @RequestBody SignupRequest signupRequest, BindingResult result) {
+        if (result.hasErrors()) return this.validar(result);
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
             return ResponseEntity.badRequest()
-                    .body(new MessageResponse("Error: Username is already in use!"));
+                    .body(new MessageResponse("Error: El Usuario ya Existe!"));
         }
         if (userRepository.existsByUsername(signupRequest.getEmail())) {
             return ResponseEntity.badRequest().body(
-                    new MessageResponse("Error: Email is Already in use")
+                    new MessageResponse("Error: Este Email ya esta en uso")
             );
         }
 
@@ -113,6 +114,12 @@ public class AuthController {
         }
         user.setRoles(roles);
         userRepository.save(user);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Usuario Registrado Con Exito!"));
+    }
+
+    public ResponseEntity<?> validar(BindingResult result) {
+        Map<String, Object> errores = new HashMap<>();
+        result.getFieldErrors().forEach(err -> errores.put(err.getField(), " El campo " + err.getField() + " " + err.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errores);
     }
 }

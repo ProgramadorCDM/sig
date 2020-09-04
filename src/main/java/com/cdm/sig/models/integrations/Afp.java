@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "afp")
@@ -14,14 +15,17 @@ public class Afp {
     private String nit;
 
     @Column
+    @NotEmpty
     @NotBlank
     private String nombre;
 
     @Column
+    @NotEmpty
     @NotBlank
     private String direccion;
 
     @Column
+    @NotEmpty
     @NotBlank
     private String telefono;
 

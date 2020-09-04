@@ -1,9 +1,9 @@
 package com.cdm.sig.services.components;
 
 import com.cdm.sig.core.archive.GenericServiceImpl;
-import com.cdm.sig.models.Capacitacion;
-import com.cdm.sig.repositories.CapacitacionRepository;
-import com.cdm.sig.services.apis.CapacitacionServiceAPI;
+import com.cdm.sig.models.Documento;
+import com.cdm.sig.repositories.DocumentoRepository;
+import com.cdm.sig.services.apis.DocumentoServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -13,20 +13,20 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Service
-public class CapacitacionServiceImpl extends GenericServiceImpl<Capacitacion, Long> implements CapacitacionServiceAPI {
+public class DocumentoServiceImpl extends GenericServiceImpl<Documento, Long> implements DocumentoServiceAPI {
 
     @Autowired
-    private CapacitacionRepository repository;
+    private DocumentoRepository repository;
 
     @Override
-    public JpaRepository<Capacitacion, Long> getRepository() {
+    public JpaRepository<Documento, Long> getRepository() {
         return repository;
     }
 
     @Override
     @NotNull
     @Transactional
-    public List<Capacitacion> findCapacitacionByEmpleados(String cedula) {
-        return repository.findCapacitacionByEmpleados(cedula);
+    public List<Documento> findDocumentoByEmpleado(String cedula) {
+        return repository.findDocumentoByEmpleado(cedula);
     }
 }

@@ -1,4 +1,4 @@
-package com.cdm.sig.models.Integrations;
+package com.cdm.sig.models.integrations;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "eps")
-public class Eps {
+@Table(name = "caja_com_familiar")
+public class CajaComFamiliar {
     @Id
     private String nit;
 

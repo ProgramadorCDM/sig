@@ -1,4 +1,4 @@
-package com.cdm.sig.models.Integrations;
+package com.cdm.sig.models.integrations;
 
 public enum ERole {
     ROLE_USER,

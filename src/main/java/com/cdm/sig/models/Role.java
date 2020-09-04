@@ -1,6 +1,6 @@
 package com.cdm.sig.models;
 
-import com.cdm.sig.models.Integrations.ERole;
+import com.cdm.sig.models.integrations.ERole;
 
 import javax.persistence.*;
 

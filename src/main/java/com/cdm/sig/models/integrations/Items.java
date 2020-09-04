@@ -1,4 +1,4 @@
-package com.cdm.sig.models.Integrations;
+package com.cdm.sig.models.integrations;
 
 import com.sun.istack.NotNull;
 

@@ -21,7 +21,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"*"}, maxAge = 3600)
-@RequestMapping("/api/contratos")
+@RequestMapping("/api/documentos")
 public class DocumentosRestController {
 
     private final DocumentoServiceAPI serviceAPI;

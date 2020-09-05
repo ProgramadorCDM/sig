@@ -29,7 +29,7 @@ public class Contrato {
     private Double salario;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Empleado empleado;
 
     @Column

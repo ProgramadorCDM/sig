@@ -20,7 +20,7 @@ public class Vacaciones {
     @NotNull
     public LocalDate fechaFin;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     public Contrato contrato;
 
     public Long getIdVacaciones() {

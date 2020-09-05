@@ -76,18 +76,16 @@ public class DocumentosRestController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<?> guardarDocumento(@Valid Documento entity, BindingResult result,
                                               @RequestParam MultipartFile archivo,
-                                              @PathVariable Long id) throws IOException {
-        if (result.hasErrors()) {
-            return this.validar(result);
-        }
-        Documento documento = serviceAPI.get(id);
-        if (documento == null) {
+                                              @PathVariable String id) throws IOException {
+
+        if (entity == null) {
             return ResponseEntity.notFound().build();
         }
         if (!archivo.isEmpty()) {
-            documento.setArchivo(archivo.getBytes());
+            entity.setArchivo(archivo.getBytes());
+            entity.setEmpleado(empleadoServiceAPI.get(id));
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(serviceAPI.save(documento));
+        return ResponseEntity.status(HttpStatus.CREATED).body(serviceAPI.save(entity));
     }
 
     @GetMapping("/pdf/{id}")

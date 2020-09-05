@@ -35,11 +35,11 @@ public class Incapacidad {
     @NotEmpty
     private String enfermedad;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private CIE10 cie10;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Empleado empleado;
 
     @Column

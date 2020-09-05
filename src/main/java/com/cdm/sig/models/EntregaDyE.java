@@ -30,7 +30,7 @@ public class EntregaDyE {
     private String tipo;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Empleado empleado;
 
     @ManyToMany(fetch = FetchType.LAZY)

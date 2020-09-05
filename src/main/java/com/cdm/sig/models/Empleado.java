@@ -7,7 +7,6 @@ import com.cdm.sig.models.integrations.Eps;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "empleados")
@@ -49,19 +48,19 @@ public class Empleado {
     @NotEmpty
     private String telefono;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @OneToOne
     private Eps eps;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @OneToOne
     private Afp afp;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @OneToOne
     private Arl arl;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private CajaComFamiliar cajaComFamiliar;
 
     @Column

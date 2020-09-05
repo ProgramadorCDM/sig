@@ -17,7 +17,7 @@ public class Recommendation {
     private Long idRecomendaciones;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Examen examen;
 
     @NotBlank

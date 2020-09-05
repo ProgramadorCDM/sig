@@ -3,6 +3,7 @@ package com.cdm.sig.controllers;
 import com.cdm.sig.models.Capacitacion;
 import com.cdm.sig.models.Empleado;
 import com.cdm.sig.services.apis.CapacitacionServiceAPI;
+import com.cdm.sig.services.apis.EmpleadoServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,12 @@ public class CapacitacionRestController {
 
     private final CapacitacionServiceAPI serviceAPI;
 
+    private final EmpleadoServiceAPI empleadoServiceAPI;
+
     @Autowired
-    public CapacitacionRestController(CapacitacionServiceAPI serviceAPI) {
+    public CapacitacionRestController(CapacitacionServiceAPI serviceAPI, EmpleadoServiceAPI empleadoServiceAPI) {
         this.serviceAPI = serviceAPI;
+        this.empleadoServiceAPI = empleadoServiceAPI;
     }
 
     @GetMapping("/all")
@@ -77,8 +81,9 @@ public class CapacitacionRestController {
 
     @PutMapping("/{id}/eliminar-empleados")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> eliminarEmpleados(@RequestBody Empleado empleado, @PathVariable Long id) {
+    public ResponseEntity<?> eliminarEmpleados(@RequestBody Empleado entity, @PathVariable Long id) {
         Capacitacion capacitacion = serviceAPI.get(id);
+        Empleado empleado = empleadoServiceAPI.get(entity.getCedula());
         if (capacitacion == null) return ResponseEntity.notFound().build();
         capacitacion.removeEmpleado(empleado);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.serviceAPI.save(capacitacion));

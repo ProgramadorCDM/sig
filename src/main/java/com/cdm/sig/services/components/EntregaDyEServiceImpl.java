@@ -7,7 +7,9 @@ import com.cdm.sig.services.apis.EntregaDyEServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Service
@@ -26,6 +28,8 @@ public class EntregaDyEServiceImpl extends GenericServiceImpl<EntregaDyE, Long> 
     }
 
     @Override
+    @NotNull
+    @Transactional
     public List<EntregaDyE> findEntregaDyEByEmpleado(String cedula) {
         return repository.findEntregaDyEByEmpleado(cedula);
     }

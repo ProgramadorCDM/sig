@@ -30,7 +30,7 @@ public class Examen {
     private String tipoExamen;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Contrato contrato;
 
     public Long getIdExamen() {

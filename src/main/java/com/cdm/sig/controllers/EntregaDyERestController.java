@@ -3,6 +3,7 @@ package com.cdm.sig.controllers;
 import com.cdm.sig.models.EntregaDyE;
 import com.cdm.sig.models.integrations.Items;
 import com.cdm.sig.services.apis.EntregaDyEServiceAPI;
+import com.cdm.sig.services.apis.utils.ItemServiceAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,12 @@ public class EntregaDyERestController {
 
     private final EntregaDyEServiceAPI serviceAPI;
 
+    private final ItemServiceAPI itemServiceAPI;
+
     @Autowired
-    public EntregaDyERestController(EntregaDyEServiceAPI serviceAPI) {
+    public EntregaDyERestController(EntregaDyEServiceAPI serviceAPI, ItemServiceAPI itemServiceAPI) {
         this.serviceAPI = serviceAPI;
+        this.itemServiceAPI = itemServiceAPI;
     }
 
     @GetMapping("/all")
@@ -79,9 +83,10 @@ public class EntregaDyERestController {
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<?> EliminarItem(@RequestBody Items items, @PathVariable Long id) {
         EntregaDyE entregaDyE = serviceAPI.get(id);
+        Items item = itemServiceAPI.get(items.getIdItem());
         if (entregaDyE == null) return ResponseEntity.notFound().build();
-        entregaDyE.removeItem(items);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(this.serviceAPI.save(entregaDyE));
+        entregaDyE.removeItem(item);
+        return ResponseEntity.status(HttpStatus.OK).body(this.serviceAPI.save(entregaDyE));
     }
 
     @GetMapping("/empleado/{id}")

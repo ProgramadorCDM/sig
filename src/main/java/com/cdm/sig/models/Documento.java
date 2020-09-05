@@ -18,7 +18,7 @@ public class Documento {
     private Long idDocumento;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     private Empleado empleado;
 
     @Column

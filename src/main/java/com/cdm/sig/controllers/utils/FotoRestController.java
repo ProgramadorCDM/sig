@@ -76,7 +76,7 @@ public class FotoRestController {
         Foto foto = this.serviceAPI.get(id);
         if (foto == null || foto.getFoto() == null) {
 
-            var defaultPhoto = serviceAPI.get("0");
+            Foto defaultPhoto = serviceAPI.get("0");
             Resource imagen = new ByteArrayResource(defaultPhoto.getFoto());
 
             return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imagen);
